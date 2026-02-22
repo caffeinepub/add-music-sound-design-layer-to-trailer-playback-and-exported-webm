@@ -1,0 +1,204 @@
+{
+  "schemaVersion": "1.0.0",
+  "projectStateVersion": 7,
+  "summary": "Internet Computer app scaffold with Motoko backend authorization/access-control and a React + shadcn-ui frontend for a trailer builder/player (timeline editing, playback, persistence, and export), including build/deploy templates and generated visual scene/overlay assets.",
+  "existing_features": [
+    {
+      "id": "IF-1",
+      "title": "Motoko backend canister scaffold with authorization mixins and access control",
+      "synonyms": [
+        "backend authorization",
+        "access control",
+        "MixinAuthorization"
+      ],
+      "description": "Backend canister includes authorization helpers (MixinAuthorization) and an access-control module, wired into main canister entrypoints.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-2",
+      "title": "Internet Identity authentication integration in frontend",
+      "synonyms": [
+        "Internet Identity",
+        "II login",
+        "auth hooks"
+      ],
+      "description": "Frontend includes hooks/utilities to authenticate via Internet Identity and create an authenticated actor for backend calls.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-3",
+      "title": "Trailer Builder/Player UI with timeline panel and canvas renderer",
+      "synonyms": [
+        "TrailerBuilderPlayerPage",
+        "timeline editor",
+        "TrailerRendererCanvas"
+      ],
+      "description": "React UI page for building/playing a trailer with timeline panel controls and a canvas-based renderer for scenes.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-4",
+      "title": "Trailer playback, persistence, and export recording utilities",
+      "synonyms": [
+        "useTrailerPlayback",
+        "useTimelinePersistence",
+        "useTrailerExportRecorder"
+      ],
+      "description": "Hooks/utilities to control trailer playback, persist timeline state, and record/export the rendered trailer output.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-5",
+      "title": "Generated trailer scene and overlay image assets bundled in frontend",
+      "synonyms": [
+        "generated assets",
+        "scene images",
+        "overlay images"
+      ],
+      "description": "Pre-generated background/scene and overlay images included under frontend/public/assets/generated for trailer rendering.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-6",
+      "title": "Build/deploy template for IC (Dockerfile, scripts, canister configs)",
+      "synonyms": [
+        "build-template",
+        "deploy.sh",
+        "icp.yaml",
+        "canister.yaml"
+      ],
+      "description": "Project includes a build template with Dockerfile, deployment script, ICP configuration, workspace/package configs, and image processing scripts (resize/prune).",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "IF-7",
+      "title": "shadcn/ui component library integrated into frontend",
+      "synonyms": [
+        "shadcn-ui",
+        "UI components"
+      ],
+      "description": "shadcn/ui components and Tailwind/Vite configuration are included for consistent UI primitives across the app.",
+      "reqIds": [],
+      "version": 1
+    },
+    {
+      "id": "feature-add-a-background-music-sound-design-layer-that-can-be-enabled-disabled-during-trailer-playback-stays-time-synchronized-with-the-trailer-timeline-play-pause-seek-reset-and-allows-basic-volume-control",
+      "title": "Add a background music/sound design layer that can be enabled/disabled during trailer playback, stays time-synchronized with the trailer timeline (play/pause/seek/reset), and allows basic volume control.",
+      "reqIds": [
+        "REQ-1"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-bundle-at-least-one-default-audio-track-as-a-static-frontend-asset-and-provide-a-simple-ui-control-to-select-the-track-even-if-only-one-option-initially",
+      "title": "Bundle at least one default audio track as a static frontend asset and provide a simple UI control to select the track (even if only one option initially).",
+      "reqIds": [
+        "REQ-2"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-update-trailer-export-so-the-downloaded-webm-includes-the-audio-layer-mixed-into-the-recording-not-video-only",
+      "title": "Update trailer export so the downloaded WebM includes the audio layer mixed into the recording (not video-only).",
+      "reqIds": [
+        "REQ-3"
+      ],
+      "version": 1
+    },
+    {
+      "id": "feature-persist-the-user-s-audio-settings-enabled-disabled-volume-selected-track-alongside-the-trailer-editing-experience-so-refreshing-the-page-restores-the-last-used-audio-settings",
+      "title": "Persist the user’s audio settings (enabled/disabled, volume, selected track) alongside the trailer editing experience so refreshing the page restores the last-used audio settings.",
+      "reqIds": [
+        "REQ-4"
+      ],
+      "version": 1
+    }
+  ],
+  "new_feature_requests": [
+    {
+      "id": "AR-1",
+      "summary": "Support generating/exporting a trailer video from a provided script/text prompt (auto-build a timeline with scenes, overlays, title cards).",
+      "reqIds": [],
+      "status": "pending"
+    },
+    {
+      "id": "AR-2",
+      "summary": "Add music/sound design layer to the trailer (background score/ambient SFX) with ability to include it in the exported video.",
+      "reqIds": [],
+      "status": "pending"
+    }
+  ],
+  "architectural_notes": [
+    "Frontend uses React + Vite + Tailwind with shadcn/ui component primitives.",
+    "Authentication is handled via Internet Identity, with actor creation abstracted in hooks for backend calls.",
+    "Trailer rendering is canvas-based with separate hooks for playback control, timeline persistence, and export/recording.",
+    "Build/deploy is supported via included build-template (Dockerfile, deploy.sh, canister.yaml/icp.yaml) and image pipeline scripts (resize/prune)."
+  ],
+  "known_issues": [],
+  "isFixRequest": false,
+  "generatedImages": [
+    {
+      "filename": "frontend/public/assets/generated/overlay-embers.dim_1920x1080.png",
+      "description": "Generated overlay image asset (embers) for trailer scenes.",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    },
+    {
+      "filename": "frontend/public/assets/generated/overlay-fog.dim_1920x1080.png",
+      "description": "Generated overlay image asset (fog) for trailer scenes.",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    },
+    {
+      "filename": "frontend/public/assets/generated/scene-bungalow-corridor.dim_1920x1080.png",
+      "description": "Generated scene background image (bungalow corridor).",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    },
+    {
+      "filename": "frontend/public/assets/generated/scene-bungalow-exterior.dim_1920x1080.png",
+      "description": "Generated scene background image (bungalow exterior).",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    },
+    {
+      "filename": "frontend/public/assets/generated/scene-forest-dusk.dim_1920x1080.png",
+      "description": "Generated scene background image (forest dusk).",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    },
+    {
+      "filename": "frontend/public/assets/generated/scene-forest-path.dim_1920x1080.png",
+      "description": "Generated scene background image (forest path).",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    },
+    {
+      "filename": "frontend/public/assets/generated/scene-spirit-fragment.dim_1920x1080.png",
+      "description": "Generated scene background image (spirit fragment).",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    },
+    {
+      "filename": "frontend/public/assets/generated/scene-tribal-village.dim_1920x1080.png",
+      "description": "Generated scene background image (tribal village).",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    },
+    {
+      "filename": "frontend/public/assets/generated/titlecard-background.dim_1920x1080.png",
+      "description": "Generated titlecard background image asset.",
+      "targetWidth": 1920,
+      "targetHeight": 1080
+    }
+  ],
+  "projectName": "Add music/sound design layer to trailer playback and exported WebM",
+  "clarification_mode": "instant",
+  "clarification_rounds": 0
+}

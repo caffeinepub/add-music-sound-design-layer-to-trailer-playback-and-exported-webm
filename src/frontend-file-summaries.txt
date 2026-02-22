@@ -1,0 +1,19 @@
+{
+  "frontend/src/App.tsx": "Main application component that wraps the trailer builder/player page with ThemeProvider (dark mode) and Toaster for notifications.",
+  "frontend/src/pages/TrailerBuilderPlayerPage.tsx": "Main trailer builder page integrating audio layer with playback controls, timeline synchronization, export functionality, and persisted audio settings UI.",
+  "frontend/src/trailer/scriptDefault.ts": "Defines the default trailer script structure with 10 segments including opening shots, cuts, quick cuts, climax montage, and title card with all required text content.",
+  "frontend/src/trailer/TrailerRendererCanvas.tsx": "Canvas-based renderer that draws scene images, overlays (fog/embers), vignette effects, and text captions/title cards synchronized to the current playback time.",
+  "frontend/src/trailer/useTrailerPlayback.ts": "Custom hook managing trailer playback state including play/pause, seeking, timing, and automatic progression through segments with proper null-safe ref initialization.",
+  "frontend/src/trailer/useTrailerExportRecorder.ts": "Enhanced export recorder hook that optionally mixes background audio into the recorded MediaRecorder stream when audio is enabled, maintaining video-only export when disabled.",
+  "frontend/src/trailer/SceneTimelinePanel.tsx": "Timeline editor component displaying all segments with editable durations, active segment highlighting, and scrubber for seeking.",
+  "frontend/src/trailer/assets.ts": "Centralized asset map referencing all generated static images from the public/assets/generated directory.",
+  "frontend/src/trailer/typography.ts": "Typography rendering functions for cinematic title cards and captions with fade animations, shadows, and proper text styling.",
+  "frontend/src/trailer/useTimelinePersistence.ts": "Custom hook providing localStorage-based persistence for timeline segment configurations with automatic save/load.",
+  "frontend/src/hooks/useQueries.ts": "React Query hooks for backend integration including user profile and timeline configuration management with proper caching and invalidation.",
+  "frontend/src/index.css": "Global styles with dark cinematic horror theme using OKLCH color system with charcoal/black backgrounds and ember/sepia accents.",
+  "frontend/tailwind.config.js": "Tailwind configuration with extended dark horror theme colors, serif typography, cinematic shadows, and custom animations.",
+  "frontend/src/trailer/audioTracks.ts": "Defines the audio track interface and exports a list of available background audio tracks with their metadata (id, label, path).",
+  "frontend/src/trailer/useAudioSettingsPersistence.ts": "Custom hook providing localStorage-based persistence for audio settings (enabled, volume, selectedTrackId) with automatic save/load functionality.",
+  "frontend/src/trailer/useTrailerAudio.ts": "Custom hook managing the background audio layer including track selection, volume control, playback synchronization with timeline, and integration with persisted settings.",
+  "frontend/src/trailer/TrailerAudioControls.tsx": "UI component displaying audio controls including enable/disable toggle, track selector, and volume slider using shadcn/ui components."
+}

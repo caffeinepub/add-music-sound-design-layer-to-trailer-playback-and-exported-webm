@@ -1,0 +1,90 @@
+{
+  "kind": "build_request",
+  "title": "Add music/sound design layer to trailer playback and exported WebM",
+  "priority": "normal",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "text": "Add a background music/sound design layer that can be enabled/disabled during trailer playback, stays time-synchronized with the trailer timeline (play/pause/seek/reset), and allows basic volume control.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "When the user clicks Play, the selected audio starts at the correct timeline time; when Pause is clicked, audio pauses; when Seek is used, audio jumps to the new time; when Reset is clicked, audio returns to time 0.",
+        "User can toggle audio on/off and adjust volume; toggling off silences audio without breaking video playback.",
+        "Audio state does not cause console errors on browsers that restrict autoplay; audio only begins after a user gesture (e.g., Play button)."
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "text": "Bundle at least one default audio track as a static frontend asset and provide a simple UI control to select the track (even if only one option initially).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "A default audio track is available without requiring any external network calls.",
+        "The UI displays the current track selection and allows changing it (if multiple are provided) without reloading the page."
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "text": "Update trailer export so the downloaded WebM includes the audio layer mixed into the recording (not video-only).",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "Exported .webm contains audible audio when played back in a standard media player.",
+        "If audio is disabled/muted at export time, the exported video is silent (video export still succeeds).",
+        "Export progress UI continues to work and the export completes without crashing."
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "text": "Persist the user’s audio settings (enabled/disabled, volume, selected track) alongside the trailer editing experience so refreshing the page restores the last-used audio settings.",
+      "target": "frontend",
+      "source": {
+        "messageIds": [
+          "msg-4"
+        ],
+        "quotes": [
+          "Yes"
+        ]
+      },
+      "acceptanceCriteria": [
+        "After setting audio options and refreshing the page, the UI reflects the previously selected options.",
+        "Persistence does not break existing segment persistence behavior."
+      ]
+    }
+  ],
+  "constraints": [
+    "Do not edit files under frontend/src/components/ui (shadcn/ui) or any other paths listed as immutable in SYSTEM_CONTEXT.",
+    "Backend must remain a single Motoko actor in backend/main.mo; only introduce a migration file if state upgrade requires it."
+  ],
+  "nonGoals": [
+    "Voice-over recording, microphone capture, or per-segment audio clips.",
+    "Third-party audio libraries or external audio streaming services.",
+    "Advanced audio editing features (waveform editor, beat sync, keyframing, multi-track mixing UI)."
+  ],
+  "imageRequirements": {
+    "required": [],
+    "edits": []
+  }
+}

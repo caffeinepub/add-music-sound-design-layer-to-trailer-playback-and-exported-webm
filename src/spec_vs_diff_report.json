@@ -1,0 +1,36 @@
+{
+  "kind": "spec_vs_diff_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-05T09:15:08.379Z",
+  "summary": "Most requested audio-layer functionality is implemented: UI controls (enable, volume, track select), timeline-synced playback (play/pause/seek/reset), localStorage persistence, and export mixing audio into the recorded WebM when enabled. One key requirement is not evidenced in the diff: the default audio file asset itself being bundled/added to the frontend static assets.",
+  "missing_requirements": [
+    {
+      "id": "REQ-2",
+      "requirement": "Bundle at least one default audio track as a static frontend asset (available without external network calls).",
+      "reason": "The code references a default track path (/assets/audio/trailer-bed-01.mp3), but the diff summary does not show the actual audio file being added under a static assets directory (e.g., frontend/public/assets/audio/...). Without the file present in the repo, this may 404 at runtime, violating the requirement that a default track is bundled and available without external calls.",
+      "evidence": [
+        "frontend/src/trailer/audioTracks.ts (references path '/assets/audio/trailer-bed-01.mp3')"
+      ]
+    }
+  ],
+  "hallucinated_features": [
+    {
+      "description": "During export recording, the audio is routed to the user’s speakers (monitor playback) while also being captured into the MediaStream.",
+      "reason": "REQ-3 only asks that exported WebM includes the mixed audio; it does not request speaker monitoring during export. The implementation explicitly connects the audio node to audioContext.destination in addition to the recording destination.",
+      "evidence": [
+        "frontend/src/trailer/useTrailerExportRecorder.ts (audioSource.connect(audioContext.destination))"
+      ]
+    }
+  ],
+  "confidence": 0.78,
+  "changed_files": [
+    "frontend-file-summaries.txt",
+    "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+    "frontend/src/trailer/TrailerAudioControls.tsx",
+    "frontend/src/trailer/audioTracks.ts",
+    "frontend/src/trailer/useAudioSettingsPersistence.ts",
+    "frontend/src/trailer/useTrailerAudio.ts",
+    "frontend/src/trailer/useTrailerExportRecorder.ts",
+    "project_state.json"
+  ]
+}

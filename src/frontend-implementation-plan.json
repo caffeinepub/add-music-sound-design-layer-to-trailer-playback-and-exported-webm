@@ -1,0 +1,124 @@
+{
+  "kind": "implementation_plan",
+  "version": "1.0",
+  "title": "Trailer audio layer (playback + WebM export) with persisted settings",
+  "requirements": [
+    {
+      "id": "REQ-1",
+      "summary": "Add a toggleable background audio layer that stays synchronized with trailer playback (play/pause/seek/reset) and supports basic volume control.",
+      "acceptanceCriteria": [
+        "When the user clicks Play, the selected audio starts at the correct timeline time; when Pause is clicked, audio pauses; when Seek is used, audio jumps to the new time; when Reset is clicked, audio returns to time 0.",
+        "User can toggle audio on/off and adjust volume; toggling off silences audio without breaking video playback.",
+        "Audio state does not cause console errors on browsers that restrict autoplay; audio only begins after a user gesture (e.g., Play button)."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/trailer/useTrailerAudio.ts",
+          "operation": "create",
+          "description": "Create a dedicated hook to manage a single background audio element (track source, enabled/mute, volume, and timeline sync). Provide methods to: align audio currentTime to trailer currentTime, pause on trailer pause, reset to 0, and perform a user-gesture-initiated play attempt that gracefully handles autoplay restrictions."
+        },
+        {
+          "path": "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+          "operation": "modify",
+          "description": "Wire the background audio hook into the trailer playback controls: on Play button click, attempt to start audio from current timeline time (only after user gesture), keep audio paused when trailer is paused, update audio position on seek, and reset audio to 0 on reset. Ensure audio toggling/volume changes affect only the audio layer and never interrupt canvas playback."
+        },
+        {
+          "path": "frontend/src/trailer/TrailerAudioControls.tsx",
+          "operation": "create",
+          "description": "Add a small UI component for audio controls (enabled toggle, volume slider, and current track display/selection). Use existing shadcn/ui components via imports (do not modify frontend/src/components/ui/*). Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+          "operation": "modify",
+          "description": "Render TrailerAudioControls within the existing controls card so users can enable/disable audio and adjust volume during playback. Use component state from useTrailerAudio and ensure interactions remain responsive during recording. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-2",
+      "summary": "Bundle at least one default audio track as a static asset and provide a simple track selection UI.",
+      "acceptanceCriteria": [
+        "A default audio track is available without requiring any external network calls.",
+        "The UI displays the current track selection and allows changing it (if multiple are provided) without reloading the page."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/public/assets/audio/trailer-bed-01.mp3",
+          "operation": "create",
+          "description": "Add a default background audio track as a static frontend asset to be used by the trailer audio layer (no external network calls)."
+        },
+        {
+          "path": "frontend/src/trailer/audioTracks.ts",
+          "operation": "create",
+          "description": "Define the available audio track list (id, label, and static asset path under frontend/public/assets/audio/*) and export it for use in UI and playback."
+        },
+        {
+          "path": "frontend/src/trailer/useTrailerAudio.ts",
+          "operation": "modify",
+          "description": "Integrate the audio track list so the audio layer can switch tracks at runtime without page reload, keeping the trailer timeline time synchronized after track changes (e.g., by applying currentTime to the new source once it can play)."
+        },
+        {
+          "path": "frontend/src/trailer/TrailerAudioControls.tsx",
+          "operation": "modify",
+          "description": "Add a track selector control bound to the audio track list and current selection. Ensure switching tracks updates the audio layer immediately while preserving the current timeline position when playing/paused. Verify the component's usage instructions before implementing."
+        }
+      ]
+    },
+    {
+      "id": "REQ-3",
+      "summary": "Update trailer export so downloaded WebM mixes the background audio layer into the recording when enabled.",
+      "acceptanceCriteria": [
+        "Exported .webm contains audible audio when played back in a standard media player.",
+        "If audio is disabled/muted at export time, the exported video is silent (video export still succeeds).",
+        "Export progress UI continues to work and the export completes without crashing."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/trailer/useTrailerExportRecorder.ts",
+          "operation": "modify",
+          "description": "Enhance the export recorder to optionally include an audio track in the recorded MediaRecorder stream by mixing the background audio element output into a MediaStream used for recording. When audio is disabled/muted, record video-only as today. Ensure the recorder remains stable and progress updates continue."
+        },
+        {
+          "path": "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+          "operation": "modify",
+          "description": "Pass the current audio layer state (enabled, volume, selected track and the underlying audio element/ref from useTrailerAudio) into the export recorder so export respects the same audio settings at export time."
+        },
+        {
+          "path": "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+          "operation": "modify",
+          "description": "Ensure export triggers a deterministic playback run for recording (start at time 0, then advance timeline until total duration) and that the audio layer is kept time-synchronized during this recording playback run."
+        }
+      ]
+    },
+    {
+      "id": "REQ-4",
+      "summary": "Persist audio settings (enabled/disabled, volume, selected track) so refresh restores last-used audio configuration without breaking existing segment persistence.",
+      "acceptanceCriteria": [
+        "After setting audio options and refreshing the page, the UI reflects the previously selected options.",
+        "Persistence does not break existing segment persistence behavior."
+      ],
+      "file_operations": [
+        {
+          "path": "frontend/src/trailer/useAudioSettingsPersistence.ts",
+          "operation": "create",
+          "description": "Create a small localStorage-backed hook dedicated to audio settings (enabled, volume, selectedTrackId) using a distinct storage key from trailer segment persistence to avoid interference."
+        },
+        {
+          "path": "frontend/src/trailer/useTrailerAudio.ts",
+          "operation": "modify",
+          "description": "Initialize audio layer state from persisted settings on mount and write back changes (toggle/volume/track selection) via the new persistence hook."
+        },
+        {
+          "path": "frontend/src/trailer/TrailerAudioControls.tsx",
+          "operation": "modify",
+          "description": "Bind UI defaults to the persisted settings-driven state so the controls accurately reflect restored values after a refresh. Verify the component's usage instructions before implementing."
+        },
+        {
+          "path": "frontend/src/trailer/useTimelinePersistence.ts",
+          "operation": "modify",
+          "description": "Confirm the timeline segment persistence logic remains unchanged and compatible by keeping its storage key and behavior intact; only adjust if needed to prevent accidental key collisions or shared serialization assumptions with the new audio settings storage."
+        }
+      ]
+    }
+  ]
+}

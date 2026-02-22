@@ -1,0 +1,88 @@
+{
+  "kind": "feature_evidence_report",
+  "features": [
+    {
+      "featureId": "feature-add-a-background-music-sound-design-layer-that-can-be-enabled-disabled-during-trailer-playback-stays-time-synchronized-with-the-trailer-timeline-play-pause-seek-reset-and-allows-basic-volume-control",
+      "featureTitle": "Add a background music/sound design layer that can be enabled/disabled during trailer playback, stays time-synchronized with the trailer timeline (play/pause/seek/reset), and allows basic volume control.",
+      "files": [
+        "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+        "frontend/src/trailer/TrailerAudioControls.tsx",
+        "frontend/src/trailer/useTrailerAudio.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-1"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-bundle-at-least-one-default-audio-track-as-a-static-frontend-asset-and-provide-a-simple-ui-control-to-select-the-track-even-if-only-one-option-initially",
+      "featureTitle": "Bundle at least one default audio track as a static frontend asset and provide a simple UI control to select the track (even if only one option initially).",
+      "files": [
+        "frontend/src/trailer/TrailerAudioControls.tsx",
+        "frontend/src/trailer/audioTracks.ts",
+        "frontend/src/trailer/useTrailerAudio.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-2"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-update-trailer-export-so-the-downloaded-webm-includes-the-audio-layer-mixed-into-the-recording-not-video-only",
+      "featureTitle": "Update trailer export so the downloaded WebM includes the audio layer mixed into the recording (not video-only).",
+      "files": [
+        "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+        "frontend/src/trailer/useTrailerExportRecorder.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-3"
+      ],
+      "confidence": "high"
+    },
+    {
+      "featureId": "feature-persist-the-user-s-audio-settings-enabled-disabled-volume-selected-track-alongside-the-trailer-editing-experience-so-refreshing-the-page-restores-the-last-used-audio-settings",
+      "featureTitle": "Persist the user’s audio settings (enabled/disabled, volume, selected track) alongside the trailer editing experience so refreshing the page restores the last-used audio settings.",
+      "files": [
+        "frontend/src/trailer/TrailerAudioControls.tsx",
+        "frontend/src/trailer/useAudioSettingsPersistence.ts",
+        "frontend/src/trailer/useTrailerAudio.ts"
+      ],
+      "components": [
+        "authorization@4.0.0",
+        "core-infrastructure@1.0.2",
+        "shadcn-ui@1.0.0",
+        "build-template-react@1.0.0",
+        "initial-app@1.0.0",
+        "github-export-icp-cli@1.0.0"
+      ],
+      "testIds": [
+        "REQ-4"
+      ],
+      "confidence": "high"
+    }
+  ]
+}

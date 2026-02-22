@@ -1,0 +1,96 @@
+{
+  "kind": "coverage_report",
+  "version": "1.0",
+  "generatedAt": "2026-02-05T09:15:08.412Z",
+  "sources": {
+    "buildRequest": true,
+    "implementationPlan": true
+  },
+  "requirements": {
+    "total": 4,
+    "implemented": 4,
+    "items": [
+      {
+        "id": "REQ-1",
+        "summary": "Add a background music/sound design layer that can be enabled/disabled during trailer playback, stays time-synchronized with the trailer timeline (play/pause/seek/reset), and allows basic volume control.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/trailer/useTrailerAudio.ts",
+          "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+          "frontend/src/trailer/TrailerAudioControls.tsx",
+          "frontend/src/pages/TrailerBuilderPlayerPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/trailer/useTrailerAudio.ts",
+          "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+          "frontend/src/trailer/TrailerAudioControls.tsx",
+          "frontend/src/pages/TrailerBuilderPlayerPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-2",
+        "summary": "Bundle at least one default audio track as a static frontend asset and provide a simple UI control to select the track (even if only one option initially).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/public/assets/audio/trailer-bed-01.mp3",
+          "frontend/src/trailer/audioTracks.ts",
+          "frontend/src/trailer/useTrailerAudio.ts",
+          "frontend/src/trailer/TrailerAudioControls.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/trailer/audioTracks.ts",
+          "frontend/src/trailer/useTrailerAudio.ts",
+          "frontend/src/trailer/TrailerAudioControls.tsx"
+        ]
+      },
+      {
+        "id": "REQ-3",
+        "summary": "Update trailer export so the downloaded WebM includes the audio layer mixed into the recording (not video-only).",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/trailer/useTrailerExportRecorder.ts",
+          "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+          "frontend/src/pages/TrailerBuilderPlayerPage.tsx"
+        ],
+        "matchedFiles": [
+          "frontend/src/trailer/useTrailerExportRecorder.ts",
+          "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+          "frontend/src/pages/TrailerBuilderPlayerPage.tsx"
+        ]
+      },
+      {
+        "id": "REQ-4",
+        "summary": "Persist the user’s audio settings (enabled/disabled, volume, selected track) alongside the trailer editing experience so refreshing the page restores the last-used audio settings.",
+        "status": "implemented",
+        "plannedFiles": [
+          "frontend/src/trailer/useAudioSettingsPersistence.ts",
+          "frontend/src/trailer/useTrailerAudio.ts",
+          "frontend/src/trailer/TrailerAudioControls.tsx",
+          "frontend/src/trailer/useTimelinePersistence.ts"
+        ],
+        "matchedFiles": [
+          "frontend/src/trailer/useAudioSettingsPersistence.ts",
+          "frontend/src/trailer/useTrailerAudio.ts",
+          "frontend/src/trailer/TrailerAudioControls.tsx"
+        ]
+      }
+    ]
+  },
+  "changedFiles": [
+    "build-request.json",
+    "build-template/README.md",
+    "feature_evidence.json",
+    "frontend-file-summaries.txt",
+    "frontend-implementation-plan.json",
+    "frontend/src/pages/TrailerBuilderPlayerPage.tsx",
+    "frontend/src/trailer/TrailerAudioControls.tsx",
+    "frontend/src/trailer/audioTracks.ts",
+    "frontend/src/trailer/useAudioSettingsPersistence.ts",
+    "frontend/src/trailer/useTrailerAudio.ts",
+    "frontend/src/trailer/useTrailerExportRecorder.ts",
+    "project_state.json",
+    "scratch/component-selection.json",
+    "spec.md",
+    "spec_vs_diff_report.json"
+  ]
+}
